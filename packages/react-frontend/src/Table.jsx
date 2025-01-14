@@ -11,19 +11,19 @@ function TableHeader() {
 }
 
 function TableBody(props) {
-  const rows = props.characterData.map((row, index) => {
+  const rows = props.characterData.map((rows, index) => {
     return (
       <tr key={index}>
-        <td>{row.name}</td>
-        <td>{row.job}</td>
+        <td>{rows.name}</td>
+        <td>{rows.job}</td>
       </tr>
     );
    }
   );
   return (
     <tr key={index}>
-    <td>{row.name}</td>
-    <td>{row.job}</td>
+    <td>{rows.name}</td>
+    <td>{rows.job}</td>
     <td>
       <button onClick={() => props.removeCharacter(index)}>
         Delete
