@@ -1,7 +1,13 @@
 // backend.js
 import express from "express";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
+
+app.use(express.json());
+
 const port = 8000;
 
 const users = {
@@ -27,9 +33,9 @@ const users = {
       job: "Aspring actress"
     },
     {
-      id: "zap555",
-      name: "Dennis",
-      job: "Bartender"
+      id: "test123",
+      name: "test",
+      job: "test"
     }
   ]
 };
@@ -63,8 +69,6 @@ app.get("/users/:id", (req, res) => {
     res.send(result);
   }
 });
-
-app.use(express.json());
 
 app.get("/users", (req, res) => {
   const name = req.query.name;
