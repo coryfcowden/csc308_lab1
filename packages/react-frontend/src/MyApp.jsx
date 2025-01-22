@@ -13,21 +13,13 @@ function MyApp() {
     setCharacters(updated);
   }
 
-  function updateList(person) { 
-    postUser(person)
-      .then(() => setCharacters([...characters, person]))
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
   function fetchUsers() {
     const promise = fetch("http://localhost:8000/users");
     return promise;
   }
 
   function postUser(person) {
-    const promise = fetch("Http://localhost:8000/users", {
+    const promise = fetch("http://localhost:8000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,6 +28,23 @@ function MyApp() {
     });
 
     return promise;
+  }
+
+  function updateList(person) {
+    postUser(person)
+      .then((response) => {
+        if (response.status === 201) {
+          return response.json();
+        } else {
+          throw new Error(`Failed to create user: ${response.status}`);
+        }
+      })
+      .then((data) => {
+        setCharacters([...characters, data]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   useEffect(() => {
